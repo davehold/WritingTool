@@ -4,6 +4,7 @@ var timerUpdateInterval;
 var duration, minutes, seconds;
 var timer = 30;
 var timerMode = false;
+var outOfTime = false; 
 var blurMode = false;
 var wordLimitActive = false;
 var backspaceBlockActive = false;
@@ -14,18 +15,34 @@ var currentWordOnlyActive = false;
 // deactivate textarea
 textarea.setAttribute("contenteditable", false);
 
-
 // register events
 textarea.addEventListener('input', updateText);
 textarea.addEventListener('keydown', handleKeydown);
 
 // activate input, deactivate preferences
 function starteDieMaschine() {
+    timer = parseInt(document.getElementById("timerInput").value, 10)*60;
+    
     textarea.setAttribute("contenteditable", true);
     textarea.innerText = "";
     textarea.focus();
 
     toggleOptions();
+}
+
+// f that, just reload when done
+function resetEverything()
+{
+    //reset timer
+    timer = 30;
+    timerMode = false;
+    outOfTime = false; 
+    blurMode = false;
+    wordLimitActive = false;
+    backspaceBlockActive = false;
+    wordLimit = 10;
+    inputLock = false;
+    currentWordOnlyActive = false;
 }
 
 function toggleOptions() {
@@ -61,18 +78,19 @@ function updateText(event)
 
     if(wordLimitActive)
     {
-        if (countWords() > wordLimit)
+        if (countWords() >= wordLimit)
         {
             toggleInputLock(false);
         }
     }
 
-    document.getElementById("lastWord").innerText = getCurrentWord();
+    //document.getElementById("lastWord").innerText = getCurrentWord();
 }
 
 function toggleInputLock(state) {
     if(!state) {
         textarea.removeAttribute("contenteditable");
+        
     } else {
         timerMode = false;
         textarea.setAttribute("contenteditable", true);
@@ -80,22 +98,30 @@ function toggleInputLock(state) {
 }
 
 function startTimer() {
-    var currentDate = new Date();            
+    if(!outOfTime)
+    {
+        var currentDate = new Date();            
 
-    minutes = parseInt(timer / 60, 10)
-    seconds = parseInt(timer % 60, 10);
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    if (timer-- <= 0) {
-        minutes = "00";
-        seconds = "00";
+        if (timer-- <= 0) {
+            minutes = "00";
+            seconds = "00";
 
-        // block input 
-        //document.getElementById("textarea").removeAttribute("contenteditable");
-        toggleInputLock(false);
+            // block input 
+            //document.getElementById("textarea").removeAttribute("contenteditable");
+            toggleInputLock(false);
+            toggleBlur();
+            toggleOptions();
+            console.log("timer ran out of tape");
+            outOfTime = true;
+        }
     }
+    
     document.getElementById("timer").innerText = minutes + ":" + seconds;
 }
 
@@ -130,7 +156,8 @@ function getCurrentWord() {
 }
 
 function countWords() {
-    var wordcount = textarea.innerText.split(' ').length;
+    var currentTextareaContent = textarea.innerText.split(' ');
+    var wordcount = currentTextareaContent.length;
     return wordcount;
 }
 

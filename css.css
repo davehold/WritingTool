@@ -4,9 +4,10 @@ body {
     padding: 0;
     margin: 0;
 
-    grid-template:  ". head head ."
-                    ". nav nav ."
-                    "txt txt txt txt";
+    grid-template:  ".      head    head    time"
+                    ".      result  result  ."
+                    ".      nav     nav     ." 
+                    "txt    txt    txt      txt" auto / 1fr 1fr 1fr 1fr;                    
 }
 
 *:focus {
@@ -40,6 +41,21 @@ body {
 
 #header {
     grid-area: head;
+}
+
+#results {
+    grid-area: result;
+}
+
+#timer {
+    grid-area: time;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
 }
 
 button {

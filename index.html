@@ -8,15 +8,20 @@
         
     <div id="header">
         <h1>Experimental Writing</h1>
-        <div id="typedtext"></div>
-        <div id="timer">00:00</div>
-        <div id="timerMode"></div>
-        <div id="wordcount">0</div>
-        <div id="lastWord"></div>
+    </div>
+
+    <div id="results">
+        <div>Your Text: <div id="typedtext"></div></div>
+        
+        <!-- <div id="timerMode"></div>-->
+        <div>Wordcount: <div id="wordcount">0</div></div>
+        <!-- <div id="lastWord"></div>-->
     </div>    
 
+    <div id="timer">00:00</div>
+
     <div id="options">
-        <p><span><input type="checkbox" class="input-inline" onclick="toggleTimer()"></span>Write for <span><input type="tel" class="input-inline" value="25"></span> minutes.</p>
+        <p><span><input type="checkbox" class="input-inline" onclick="toggleTimer()"></span>Write for <span><input type="tel" id="timerInput" class="input-inline" value="25"></span> minutes.</p>
         <p><span><input type="checkbox" class="input-inline" onclick="toggleWordLimit()"></span>Write a maximum of <span><input type="tel" class="input-inline" value="280"></span> words.</p>
         <p><span><input type="checkbox" class="input-inline" onclick="toggleBackspaceBlock()"></span> Disable Backspace.</p>
         <p><span><input type="checkbox" class="input-inline" onclick="toggleBlur()"></span> Let me write blind.</p>
