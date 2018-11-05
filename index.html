@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
         <meta charset="utf-8">
@@ -16,11 +16,16 @@
     </div>    
 
     <div id="options">
-        <button onclick="toggleBlur()">Toggle Blur</button>
-        <button onclick="toggleTimer()">Start Timer</button>
-        <button onclick="toggleWordLimit()">Lock at 10 Words</button>
-        <button onclick="toggleBackspaceBlock()">Block Backspace</button>
+        <p><span><input type="checkbox" class="input-inline" onclick="toggleTimer()"></span>Write for <span><input type="tel" class="input-inline" value="25"></span> minutes.</p>
+        <p><span><input type="checkbox" class="input-inline" onclick="toggleWordLimit()"></span>Write a maximum of <span><input type="tel" class="input-inline" value="280"></span> words.</p>
+        <p><span><input type="checkbox" class="input-inline" onclick="toggleBackspaceBlock()"></span> Disable Backspace.</p>
+        <p><span><input type="checkbox" class="input-inline" onclick="toggleBlur()"></span> Blur the whole damn thing.</p>
+        <!-- <button onclick="toggleBlur()">Toggle Blur</button>-->
+        <!--<button onclick="toggleTimer()">Start Timer</button>
+        <button onclick="toggleWordLimit()">Lock at 10 Words</button>-->
+        <!-- <button onclick="toggleBackspaceBlock()">Block Backspace</button>-->
         <!--<button onclick="toggleInputLock(true)">Unlock textarea</button> -->    
+        <button onclick="starteDieMaschine()">Start writing!</button>
     </div>
 
     <div id="textarea" contenteditable spellcheck="false">>>&nbsp;</div>

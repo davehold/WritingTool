@@ -53,3 +53,15 @@ button {
     cursor: pointer;
 }
 
+.input-inline {
+    display: inline-block;
+    border: 0;
+    border-bottom: 1px solid #ccc !important;
+    overflow: visible;
+    font: inherit;
+    text-align: right;
+}
+
+*, ::before, ::after {
+    box-sizing: inherit;
+}
