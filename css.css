@@ -1,7 +1,12 @@
 body {
+    display: grid;
     font-family: 'Roboto Slab', serif;
     padding: 0;
     margin: 0;
+
+    grid-template:  ". head head ."
+                    ". nav nav ."
+                    "txt txt txt txt";
 }
 
 *:focus {
@@ -9,6 +14,7 @@ body {
 }
 
 #textarea {
+    grid-area: txt;
     -moz-appearance: textarea;
     -webkit-appearance: textarea;
     appearance: textarea;    
@@ -17,12 +23,33 @@ body {
     padding-top: 5vh;
     margin: auto;
     resize: both;
-    width: 50vw;
-    height: 50vh;    
+    width: 90vw;  
     transition:all .2s ease-out;
-}
+    font-size: 3em;
+    background: none;    
+} 
 
 /* toggle blur for textarea */
 #textarea.active {
-    filter: blur(5px);
+    filter: blur(13px);
 }
+
+#options {
+    grid-area: nav;
+}
+
+#header {
+    grid-area: head;
+}
+
+button {
+    background-color: #565469;
+    border: none;
+    border-radius: 5em;
+    padding: 10px;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+}
+
