@@ -1,0 +1,28 @@
+body {
+    font-family: 'Roboto Slab', serif;
+    padding: 0;
+    margin: 0;
+}
+
+*:focus {
+    outline:0px none transparent;
+}
+
+#textarea {
+    -moz-appearance: textarea;
+    -webkit-appearance: textarea;
+    appearance: textarea;    
+    overflow: auto;
+    
+    padding-top: 5vh;
+    margin: auto;
+    resize: both;
+    width: 50vw;
+    height: 50vh;    
+    transition:all .2s ease-out;
+}
+
+/* toggle blur for textarea */
+#textarea.active {
+    filter: blur(5px);
+}
