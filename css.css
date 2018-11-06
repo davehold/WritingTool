@@ -3,11 +3,20 @@ body {
     font-family: 'Roboto Slab', serif;
     padding: 0;
     margin: 0;
+}
 
+.gridlayout {
     grid-template:  ".      head    head    time"
                     ".      result  result  ."
                     ".      nav     nav     ." 
                     "txt    txt    txt      txt" auto / 1fr 1fr 1fr 1fr;                    
+}
+
+.gridlayout-fullscreen {
+    grid-template:  ".      txt txt txt ."
+                    ".      txt txt txt ."
+                    ".      txt txt txt ." 
+                    ".      txt txt txt ." auto ;    
 }
 
 *:focus {
@@ -19,7 +28,7 @@ body {
     -moz-appearance: textarea;
     -webkit-appearance: textarea;
     appearance: textarea;    
-    overflow: auto;
+    
     
     padding-top: 5vh;
     margin: auto;
@@ -28,6 +37,7 @@ body {
     transition:all .2s ease-out;
     font-size: 3em;
     background: none;    
+    outline: none;
 } 
 
 /* toggle blur for textarea */

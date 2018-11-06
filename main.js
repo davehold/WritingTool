@@ -1,5 +1,7 @@
 var textarea = document.getElementById("textarea");
 var options = document.getElementById("options");
+var header = document.getElementById("header");
+var results = document.getElementById("results");
 var timerUpdateInterval;
 var duration, minutes, seconds;
 var timer = 30;
@@ -21,13 +23,17 @@ textarea.addEventListener('keydown', handleKeydown);
 
 // activate input, deactivate preferences
 function starteDieMaschine() {
-    timer = parseInt(document.getElementById("timerInput").value, 10)*60;
-    
     textarea.setAttribute("contenteditable", true);
     textarea.innerText = "";
     textarea.focus();
 
     toggleOptions();
+    toggleHeader();
+    toggleResults();
+
+    if(timerMode) {
+        timerUpdateInterval = setInterval(startTimer, 1000);
+    }
 }
 
 // f that, just reload when done
@@ -45,6 +51,17 @@ function resetEverything()
     currentWordOnlyActive = false;
 }
 
+function toggleGridLayout() {
+    if(document.getElementById("body").className == "gridlayout") {
+        document.getElementById("body").classList.remove("gridlayout");
+        document.getElementById("body").classList.add("gridlayout-fullscreen");
+    } else {
+        document.getElementById("body").classList.remove("gridlayout");
+        document.getElementById("body").classList.remove("gridlayout-fullscreen");
+        document.getElementById("body").classList.add("gridlayout");
+    }
+}
+
 function toggleOptions() {
     if(options.style.display == "none")
     {
@@ -53,6 +70,25 @@ function toggleOptions() {
         options.style.display = "none";
     }
 }
+
+function toggleHeader() {
+    if(header.style.display == "none")
+    {
+        header.style.display = "block";
+    } else {
+        header.style.display = "none";
+    }
+}
+
+function toggleResults() {
+    if(results.style.display == "none")
+    {
+        results.style.display = "block";
+    } else {
+        results.style.display = "none";
+    }
+}
+
 
 function handleKeydown(event) 
 {
@@ -141,7 +177,7 @@ function toggleTimer() {
     if(!timerMode) {
         timerMode = true;
         // debug stuff... document.getElementById("timerMode").innerText = "Timer Mode is ON";
-        timerUpdateInterval = setInterval(startTimer, 1000);
+        timer = parseInt(document.getElementById("timerInput").value, 10)*60;
     } else {
         timerMode = false;
         //document.getElementById("timerMode").innerText = "Timer Mode is OFF";
@@ -164,6 +200,7 @@ function countWords() {
 function toggleWordLimit() {
     if(!wordLimitActive)
     {
+        wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
         wordLimitActive = true;
     } else {
         wordLimitActive = false;
