@@ -13,6 +13,7 @@ var backspaceBlockActive = false;
 var wordLimit = 10;
 var inputLock = false;
 var currentWordOnlyActive = false;
+var showOverlay = false;
 
 // deactivate textarea
 textarea.setAttribute("contenteditable", false);
@@ -21,8 +22,17 @@ textarea.setAttribute("contenteditable", false);
 textarea.addEventListener('input', updateText);
 textarea.addEventListener('keydown', handleKeydown);
 
+// hotfix to make sure blurred text gets blurred again
+// i'am too lazy to fiddle with the checkbox states, reloading
+// and stuff. you know. don't bother me. thanks.
+if(document.getElementById("checkboxBlind").checked == true) {
+    toggleBlur();
+}
+
 // activate input, deactivate preferences
 function starteDieMaschine() {
+    wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
+    document.getElementById("maxwords").innerText = wordLimit;
     textarea.setAttribute("contenteditable", true);
     textarea.innerText = "";
     textarea.focus();
@@ -30,6 +40,35 @@ function starteDieMaschine() {
     toggleOptions();
     toggleHeader();
     toggleResults();
+
+    if(document.getElementById("checkboxTimer").checked == true)
+    {
+        timerMode = true;
+        timer = parseInt(document.getElementById("timerInput").value, 10)*60;
+    } else {
+        timerMode = false;
+    }
+
+    if(document.getElementById("checkboxWordlimit").checked == true)
+    {
+        document.getElementById("maxwords").style.display = "inline";
+        wordLimitActive = true
+    } else {
+        document.getElementById("maxwords").style.display = "none";
+        wordLimitActive = false;
+    }
+
+    if(document.getElementById("checkboxBackspace").checked == true) 
+    {
+        backspaceBlockActive = true;
+    } else {
+        backspaceBlockActive = false;
+    }
+
+    if(document.getElementById("checkboxOverlay").checked == true) 
+    {
+        toggleOverlay();
+    }
 
     if(timerMode) {
         timerUpdateInterval = setInterval(startTimer, 1000);
@@ -103,6 +142,21 @@ function handleKeydown(event)
             return false;
         }
     }
+
+    if(wordLimitActive)
+    {
+        if (countWords() >= wordLimit)
+        {
+            if(event.keyCode === 32) 
+            { 
+                setInputLock(true);                
+                if (typeof (event.preventDefault) == 'function') event.preventDefault();
+                
+                return false;
+            }
+            
+        }
+    }
 }
 
 function updateText(event)
@@ -112,19 +166,11 @@ function updateText(event)
     document.getElementById("typedtext").innerText = textContent;
     document.getElementById("wordcount").innerText = countWords();
 
-    if(wordLimitActive)
-    {
-        if (countWords() >= wordLimit)
-        {
-            toggleInputLock(false);
-        }
-    }
-
     //document.getElementById("lastWord").innerText = getCurrentWord();
 }
 
-function toggleInputLock(state) {
-    if(!state) {
+function setInputLock(state) {
+    if(state) {
         textarea.removeAttribute("contenteditable");
         
     } else {
@@ -150,7 +196,7 @@ function startTimer() {
 
             // block input 
             //document.getElementById("textarea").removeAttribute("contenteditable");
-            toggleInputLock(false);
+            setInputLock(true);
             toggleBlur();
             toggleOptions();
             console.log("timer ran out of tape");
@@ -175,11 +221,11 @@ function toggleBlur() {
 
 function toggleTimer() {
     if(!timerMode) {
-        timerMode = true;
+        //timerMode = true;
         // debug stuff... document.getElementById("timerMode").innerText = "Timer Mode is ON";
-        timer = parseInt(document.getElementById("timerInput").value, 10)*60;
+        //timer = parseInt(document.getElementById("timerInput").value, 10)*60;
     } else {
-        timerMode = false;
+        //timerMode = false;
         //document.getElementById("timerMode").innerText = "Timer Mode is OFF";
         clearInterval(timerUpdateInterval);
     }
@@ -200,10 +246,11 @@ function countWords() {
 function toggleWordLimit() {
     if(!wordLimitActive)
     {
-        wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
-        wordLimitActive = true;
+        //document.getElementById("maxwords").style.display = "inline";
+        //wordLimitActive = true;
     } else {
-        wordLimitActive = false;
+        //document.getElementById("maxwords").style.display = "none";
+        //wordLimitActive = false;
     }
 }
 
@@ -214,4 +261,30 @@ function toggleBackspaceBlock() {
     } else {
         backspaceBlockActive = false;
     }
+}
+
+function toggleOverlay() {
+    if(document.getElementById("checkboxOverlay").checked == true) 
+    {
+        document.getElementById("overlay").style.display = "block";
+        showOverlay = true;
+    } else {
+        document.getElementById("overlay").style.display = "none";
+        showOverlay = false;
+    }
+
+    //var oobj = document.getElementById("overlay");
+    /*if(oobj.style.display == "block")
+    {
+        //oobj.style.width = "1%";
+        //oobj.style.height = "1%";
+        //document.getElementById("overlay").style.display = "none";
+        //oobj.classList.toggle("overlay-shrink");
+    } else {
+        //oobj.style.width = "10%";
+        //oobj.style.height = "10%";
+        //oobj.classList.remove("overlay-shrink");
+       // oobj.classList.toggle("overlay-shrink");
+        document.getElementById("overlay").style.display = "block";
+    }*/
 }

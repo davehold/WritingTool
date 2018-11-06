@@ -6,7 +6,7 @@ body {
 }
 
 .gridlayout {
-    grid-template:  ".      head    head    time"
+    grid-template:  ".      head    head    ."
                     ".      result  result  ."
                     ".      nav     nav     ." 
                     "txt    txt    txt      txt" auto / 1fr 1fr 1fr 1fr;                    
@@ -39,6 +39,10 @@ body {
     background: none;    
     outline: none;
 } 
+
+#maxwords {
+    display: none;
+}
 
 /* toggle blur for textarea */
 #textarea.active {
@@ -90,4 +94,52 @@ button {
 
 *, ::before, ::after {
     box-sizing: inherit;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    border-radius: 20px 20px 0 0 ;
+    width: 120px;
+    height: 100px;
+    top: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    font-size: 20px;
+    color: white;
+    transform: translate(-50%,-50%);
+}
+
+.overlay-wordcount {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    font-size: 20px;
+    color: white;
+    transform: translate(-50%,-50%);
+}
+
+.overlay-wordcount-max {
+    position: absolute;
+    color: #56546949;
+    top: 80%;
+    left: 50%;
+    font-size: 1em;
+    color: white;
+    transform: translate(-50%,-50%);
+}
+
+.overlay-shrink {
+    width: 1% !important;
+    height: 1% !important;
 }

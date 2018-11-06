@@ -7,33 +7,44 @@
     <body id="body" class="gridlayout">
         
     <div id="header">
-        <h1>Experimental Writing</h1>
+        <h1>Experimental Writing</h1><small>Version: Prototype 1 - aka hacked together in a couple of days</small>
     </div>
 
     <div id="results">
-        <div>Your Text: <div id="typedtext"></div></div>
+        <!-- <div>Your Text: <div id="typedtext"></div></div>-->
         
         <!-- <div id="timerMode"></div>-->
-        <div>Wordcount: <div id="wordcount">0</div></div>
+        <!-- <div>Wordcount: <div id="wordcount">0</div></div>-->
         <!-- <div id="lastWord"></div>-->
     </div>    
 
-    <div id="timer"></div>
-
     <div id="options">
-        <p><span><input type="checkbox" class="input-inline" onclick="toggleTimer()"></span>Write for <span><input type="tel" id="timerInput" class="input-inline" value="25"></span> minutes.</p>
-        <p><span><input type="checkbox" class="input-inline" onclick="toggleWordLimit()"></span>Write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" value="280"></span> words.</p>
-        <p><span><input type="checkbox" class="input-inline" onclick="toggleBackspaceBlock()"></span> Disable Backspace.</p>
-        <p><span><input type="checkbox" class="input-inline" onclick="toggleBlur()"></span> Let me write blind.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>Write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>Write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
         <!-- <button onclick="toggleBlur()">Toggle Blur</button>-->
         <!--<button onclick="toggleTimer()">Start Timer</button>
         <button onclick="toggleWordLimit()">Lock at 10 Words</button>-->
         <!-- <button onclick="toggleBackspaceBlock()">Block Backspace</button>-->
         <!--<button onclick="toggleInputLock(true)">Unlock textarea</button> -->    
         <button onclick="starteDieMaschine()">Start writing!</button>
+        <!--<button onclick="toggleOverlay()">Turn on UI (Wordcount and Timer, if set)</button>-->
     </div>
 
     <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
+    
+    <div id="overlay" onclick="toggleOverlay()">
+        <div id="timer" class="overlay-text">00</div>
+        <div id="wordcount" title="This is your wordcount" class="overlay-wordcount">0</div> 
+        <div id="maxwords" title="This is the maximum amount of words you can type" class="overlay-wordcount-max">0</div>
+    </div>
+      
+      
+      <script>
+      
+      </script>
 
     </body>
     <script src="main-dist.js"></script>
