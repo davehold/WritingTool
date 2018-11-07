@@ -59,6 +59,7 @@ body {
 
 #results {
     grid-area: result;
+    display: none;
 }
 
 #timer {

@@ -25,7 +25,7 @@ textarea.addEventListener('keydown', handleKeydown);
 // hotfix to make sure blurred text gets blurred again
 // i'am too lazy to fiddle with the checkbox states, reloading
 // and stuff. you know. don't bother me. thanks.
-if(document.getElementById("checkboxBlind").checked == true) {
+if(document.getElementById("checkboxBlind").checked == true && blurMode == true) {
     toggleBlur();
 }
 
@@ -191,16 +191,20 @@ function startTimer() {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         if (timer-- <= 0) {
+            blurMode = false;
+            outOfTime = true;
+
             minutes = "00";
             seconds = "00";
 
-            // block input 
-            //document.getElementById("textarea").removeAttribute("contenteditable");
+            textarea.style.display = "none";
+
             setInputLock(true);
             toggleBlur();
-            toggleOptions();
+            toggleResults();
+            toggleHeader();
+            
             console.log("timer ran out of tape");
-            outOfTime = true;
         }
     }
     
@@ -208,7 +212,8 @@ function startTimer() {
 }
 
 function toggleBlur() {
-    if(!blurMode) {
+    if(document.getElementById("checkboxBlind").checked == true) 
+    {
         blurMode = true;
         //textarea.setAttribute("class", "blur");
         textarea.setAttribute("class", "active");
@@ -217,6 +222,21 @@ function toggleBlur() {
         //textarea.setAttribute("class", "unblur");
         textarea.setAttribute("class", "");
     }
+
+    if (outOfTime == true ) {
+        blurMode = false;
+        //textarea.setAttribute("class", "unblur");
+        textarea.setAttribute("class", "");
+    }
+    /*if(!blurMode) {
+        blurMode = true;
+        //textarea.setAttribute("class", "blur");
+        textarea.setAttribute("class", "active");
+    } else {
+        blurMode = false;
+        //textarea.setAttribute("class", "unblur");
+        textarea.setAttribute("class", "");
+    }*/
 }
 
 function toggleTimer() {

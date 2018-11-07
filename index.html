@@ -7,20 +7,24 @@
     <body id="body" class="gridlayout">
         
     <div id="header">
-        <h1>Experimental Writing</h1><small>Version: Prototype 1 - aka hacked together in a couple of days</small>
+        <h1>Writing Tool</h1><small>Version: Prototype 1 - aka hacked together in a couple of days</small>
     </div>
 
     <div id="results">
-        <!-- <div>Your Text: <div id="typedtext"></div></div>-->
+        <h2>Results are in: </h2>
+        <div>You wrote <span id="wordcount">0</span> words.</div>
+        <div>Here is your text:</div>
+        <p><textarea id="typedtext"></textarea></p>
         
         <!-- <div id="timerMode"></div>-->
-        <!-- <div>Wordcount: <div id="wordcount">0</div></div>-->
+        <!-- -->
         <!-- <div id="lastWord"></div>-->
+        <button onclick="location.reload()">Restart</button>
     </div>    
 
     <div id="options">
-        <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>Write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>Write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
