@@ -149,7 +149,20 @@ function handleKeydown(event)
         {
             if(event.keyCode === 32) 
             { 
-                setInputLock(true);                
+                if(timerMode)
+                {
+                    // this will trigger the timer function
+                    // which does the rest
+                    timer = 0;
+                } else {
+
+                    setInputLock(true);             
+                    toggleBlur();
+                    toggleResults();
+                    toggleHeader();   
+                    textarea.style.display = "none";
+                }
+
                 if (typeof (event.preventDefault) == 'function') event.preventDefault();
                 
                 return false;
@@ -164,7 +177,10 @@ function updateText(event)
     var textContent = textarea.innerText;
     
     document.getElementById("typedtext").innerText = textContent;
-    document.getElementById("wordcount").innerText = countWords();
+    //document.getElementById("wordcount").innerText = countWords();
+    document.getElementsByClassName("wordcount")[0].innerText = countWords();
+    document.getElementsByClassName("wordcount")[1].innerText = countWords();
+    console.log("text updated");
 
     //document.getElementById("lastWord").innerText = getCurrentWord();
 }
@@ -260,6 +276,7 @@ function getCurrentWord() {
 function countWords() {
     var currentTextareaContent = textarea.innerText.split(' ');
     var wordcount = currentTextareaContent.length;
+    
     return wordcount;
 }
 
