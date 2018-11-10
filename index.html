@@ -23,9 +23,11 @@
     </div>    
 
     <div id="options">
-            <button onclick="increaseFontSize()">Increase fontsize</button>
-            <div>current font size</div><span id="currentFontSize"></span>
-            <button onclick="decreaseFontSize()">Decrease fontsize</button>
+        <p>
+            <div class="pseudo-button clickable" onclick="increaseFontSize()">++</div>
+            <span>current font size: </span><span id="currentFontSize">0</span>
+            <div class="pseudo-button clickable" onclick="decreaseFontSize()">--</div>
+        </p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>

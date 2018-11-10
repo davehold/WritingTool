@@ -1,3 +1,4 @@
+var fontSizes = ['0.5em', '1em', '2em', '3em'];
 var textarea = document.getElementById("textarea");
 var options = document.getElementById("options");
 var header = document.getElementById("header");
@@ -14,9 +15,13 @@ var wordLimit = 10;
 var inputLock = false;
 var currentWordOnlyActive = false;
 var showOverlay = false;
+var activeFS = 2; //font size for textarea
 
 // deactivate textarea
 textarea.setAttribute("contenteditable", false);
+
+// set default font size
+setFontSize();
 
 // register events
 textarea.addEventListener('input', updateText);
@@ -28,6 +33,11 @@ textarea.addEventListener('keydown', handleKeydown);
 if(document.getElementById("checkboxBlind").checked == true && blurMode == true) {
     toggleBlur();
 }
+
+// CHANGE FONTSIZE
+// DEBUG, find a better solution, please. 
+
+//document.getElementById("textarea").style.fontSize = getCurrentFontSize();
 
 // activate input, deactivate preferences
 function starteDieMaschine() {
@@ -300,15 +310,29 @@ function toggleOverlay() {
 }
 
 function getCurrentFontSize() {
-    var cfz = document.getElementById("textarea").style.fontSize;
-    return cfz;
-    //document.getElementById("currentFontSize")
+    return fontSizes[activeFS];
+}
+
+function setFontSize() {
+    document.getElementById("textarea").style.fontSize = getCurrentFontSize();
+    document.getElementById("currentFontSize").innerHTML = getCurrentFontSize();
 }
 
 function increaseFontSize() {
+    //array
+    if(activeFS + 1 < fontSizes.length)
+    {
+        activeFS += 1;
+    }
 
+    setFontSize();
 }
 
 function decreaseFontSize() {
+    if(activeFS - 1 >= 0)
+    {
+        activeFS -= 1;
+    }
 
+    setFontSize();
 }
