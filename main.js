@@ -231,28 +231,16 @@ function toggleBlur() {
     if(document.getElementById("checkboxBlind").checked == true) 
     {
         blurMode = true;
-        //textarea.setAttribute("class", "blur");
         textarea.setAttribute("class", "active");
     } else {
         blurMode = false;
-        //textarea.setAttribute("class", "unblur");
         textarea.setAttribute("class", "");
     }
 
     if (outOfTime == true ) {
         blurMode = false;
-        //textarea.setAttribute("class", "unblur");
         textarea.setAttribute("class", "");
     }
-    /*if(!blurMode) {
-        blurMode = true;
-        //textarea.setAttribute("class", "blur");
-        textarea.setAttribute("class", "active");
-    } else {
-        blurMode = false;
-        //textarea.setAttribute("class", "unblur");
-        textarea.setAttribute("class", "");
-    }*/
 }
 
 function toggleTimer() {
@@ -309,19 +297,18 @@ function toggleOverlay() {
         document.getElementById("overlay").style.display = "none";
         showOverlay = false;
     }
+}
 
-    //var oobj = document.getElementById("overlay");
-    /*if(oobj.style.display == "block")
-    {
-        //oobj.style.width = "1%";
-        //oobj.style.height = "1%";
-        //document.getElementById("overlay").style.display = "none";
-        //oobj.classList.toggle("overlay-shrink");
-    } else {
-        //oobj.style.width = "10%";
-        //oobj.style.height = "10%";
-        //oobj.classList.remove("overlay-shrink");
-       // oobj.classList.toggle("overlay-shrink");
-        document.getElementById("overlay").style.display = "block";
-    }*/
+function getCurrentFontSize() {
+    var cfz = document.getElementById("textarea").style.fontSize;
+    return cfz;
+    //document.getElementById("currentFontSize")
+}
+
+function increaseFontSize() {
+
+}
+
+function decreaseFontSize() {
+
 }

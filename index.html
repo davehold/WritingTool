@@ -7,7 +7,7 @@
     <body id="body" class="gridlayout">
         
     <div id="header">
-        <h1>Writing Tool</h1><small>Version: Prototype 1 - aka hacked together in a couple of days</small>
+        <h1>Writing Tool</h1><small>Version: Prototype 1.1 - aka hacked together in a couple of days and now fixed a couple of things</small>
     </div>
 
     <div id="results">
@@ -23,6 +23,9 @@
     </div>    
 
     <div id="options">
+            <button onclick="increaseFontSize()">Increase fontsize</button>
+            <div>current font size</div><span id="currentFontSize"></span>
+            <button onclick="decreaseFontSize()">Decrease fontsize</button>
         <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>

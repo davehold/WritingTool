@@ -51,6 +51,10 @@ body {
 
 #options {
     grid-area: nav;
+    padding: 1em;
+    border-radius: 5px;
+    border-left: 1px solid #b5b1d650;
+    border-right: 1px solid #b5b1d650;;
 }
 
 #header {
