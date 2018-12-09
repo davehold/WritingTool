@@ -34,11 +34,6 @@ if(document.getElementById("checkboxBlind").checked == true && blurMode == true)
     toggleBlur();
 }
 
-// CHANGE FONTSIZE
-// DEBUG, find a better solution, please. 
-
-//document.getElementById("textarea").style.fontSize = getCurrentFontSize();
-
 // activate input, deactivate preferences
 function starteDieMaschine() {
     wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
@@ -83,21 +78,6 @@ function starteDieMaschine() {
     if(timerMode) {
         timerUpdateInterval = setInterval(startTimer, 1000);
     }
-}
-
-// f that, just reload when done
-function resetEverything()
-{
-    //reset timer
-    timer = 30;
-    timerMode = false;
-    outOfTime = false; 
-    blurMode = false;
-    wordLimitActive = false;
-    backspaceBlockActive = false;
-    wordLimit = 10;
-    inputLock = false;
-    currentWordOnlyActive = false;
 }
 
 function toggleGridLayout() {
