@@ -6,45 +6,44 @@
     </head>
     <body id="body" class="gridlayout">
         
-    <div id="header">
-        <h1>Writing Tool</h1><small>Version: Prototype 1.1 - aka hacked together in a couple of days and now fixed a couple of things</small>
-    </div>
+        <div id="header">
+            <h1>Writing Tool</h1><small>Version: Prototype 1.1 - aka hacked together in a couple of days</small>
+        </div>
 
-    <div id="results">
-        <h2>Results are in: </h2>
-        <div>You wrote <span class="wordcount">0</span> words.</div>
-        <div>Here is your text:</div>
-        <p><textarea id="typedtext"></textarea></p>
-        <button onclick="location.reload()">Restart</button>
-    </div>    
+        <div id="results">
+            <h2>Results are in: </h2>
+            <div>You wrote <span class="wordcount">0</span> words.</div>
+            <div>Here is your text:</div>
+            <p><textarea id="typedtext"></textarea></p>
+            <button onclick="location.reload()">Restart</button>
+        </div>    
 
-    <div id="options">
-        <p>
-            <div class="pseudo-button clickable" onclick="increaseFontSize()">++</div>
-            <span>current font size: </span><span id="currentFontSize">0</span>
-            <div class="pseudo-button clickable" onclick="decreaseFontSize()">--</div>
-        </p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
-        <button onclick="starteDieMaschine()">Start writing!</button>
-    </div>
+        <div id="options">
+            <p>
+                <div class="pseudo-button clickable" onclick="increaseFontSize()">++</div>
+                <span>current font size: </span><span id="currentFontSize">0</span>
+                <div class="pseudo-button clickable" onclick="decreaseFontSize()">--</div>
+            </p>
+            <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
+            <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
+            <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>
+            <p><span><input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
+            <p><span><input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
+            <button onclick="starteDieMaschine()">Start writing!</button>
+        </div>
 
-    <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
-    
-    <div id="overlay" onclick="toggleOverlay()">
-        <div id="timer" class="overlay-text">00</div>
-        <div title="This is your wordcount" class="wordcount overlay-wordcount">0</div> 
-        <div id="maxwords" title="This is the maximum amount of words you can type" class="overlay-wordcount-max">0</div>
-    </div>
+        <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
+        
+        <div id="overlay">
+            <div id="timer" class="overlay-text">00</div>
+            <div title="This is your wordcount" class="wordcount overlay-wordcount">0</div> 
+            <div id="maxwords" title="This is the maximum amount of words you can type" class="overlay-wordcount-max">0</div>
+        </div>
+        
+        <div id="overlay-blur-toggle" onclick="forceBlurToggle()">
+            <p>Toggle Blur</p>
+        </div>
       
-      
-      <script>
-      
-      </script>
-
     </body>
     <script src="main-dist.js"></script>
 </html>

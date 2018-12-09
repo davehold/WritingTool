@@ -120,10 +120,10 @@ function toggleResults() {
 
 function handleKeydown(event) 
 {
+    event = event || window.event;
+
     if(backspaceBlockActive)
     {
-        event = event || window.event;
-        
         if(event.keyCode === 8) 
         { 
             if (typeof (event.preventDefault) == 'function') event.preventDefault();
@@ -215,6 +215,23 @@ function startTimer() {
 
 function toggleBlur() {
     if(document.getElementById("checkboxBlind").checked == true) 
+    {
+        blurMode = true;
+        textarea.setAttribute("class", "active");
+    } else {
+        blurMode = false;
+        textarea.setAttribute("class", "");
+    }
+
+    if (outOfTime == true ) {
+        blurMode = false;
+        textarea.setAttribute("class", "");
+    }
+}
+
+// just a lazy hotfix to be able to toggle the blur in any situation
+function forceBlurToggle() {
+    if(blurMode == false) 
     {
         blurMode = true;
         textarea.setAttribute("class", "active");
