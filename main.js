@@ -13,7 +13,6 @@ var wordLimitActive = false;
 var backspaceBlockActive = false;
 var wordLimit = 10;
 var inputLock = false;
-var currentWordOnlyActive = false;
 var showOverlay = false;
 var activeFS = 2; //font size for textarea
 
@@ -124,7 +123,7 @@ function handleKeydown(event)
     if(backspaceBlockActive)
     {
         event = event || window.event;
-        //console.log(event.keyCode);
+        
         if(event.keyCode === 8) 
         { 
             if (typeof (event.preventDefault) == 'function') event.preventDefault();
@@ -167,12 +166,9 @@ function updateText(event)
     var textContent = textarea.innerText;
     
     document.getElementById("typedtext").innerText = textContent;
-    //document.getElementById("wordcount").innerText = countWords();
     document.getElementsByClassName("wordcount")[0].innerText = countWords();
     document.getElementsByClassName("wordcount")[1].innerText = countWords();
     console.log("text updated");
-
-    //document.getElementById("lastWord").innerText = getCurrentWord();
 }
 
 function setInputLock(state) {
@@ -234,13 +230,7 @@ function toggleBlur() {
 }
 
 function toggleTimer() {
-    if(!timerMode) {
-        //timerMode = true;
-        // debug stuff... document.getElementById("timerMode").innerText = "Timer Mode is ON";
-        //timer = parseInt(document.getElementById("timerInput").value, 10)*60;
-    } else {
-        //timerMode = false;
-        //document.getElementById("timerMode").innerText = "Timer Mode is OFF";
+    if(timerMode) {
         clearInterval(timerUpdateInterval);
     }
 }
@@ -256,17 +246,6 @@ function countWords() {
     var wordcount = currentTextareaContent.length;
     
     return wordcount;
-}
-
-function toggleWordLimit() {
-    if(!wordLimitActive)
-    {
-        //document.getElementById("maxwords").style.display = "inline";
-        //wordLimitActive = true;
-    } else {
-        //document.getElementById("maxwords").style.display = "none";
-        //wordLimitActive = false;
-    }
 }
 
 function toggleBackspaceBlock() {

@@ -15,10 +15,6 @@
         <div>You wrote <span class="wordcount">0</span> words.</div>
         <div>Here is your text:</div>
         <p><textarea id="typedtext"></textarea></p>
-        
-        <!-- <div id="timerMode"></div>-->
-        <!-- -->
-        <!-- <div id="lastWord"></div>-->
         <button onclick="location.reload()">Restart</button>
     </div>    
 
@@ -29,17 +25,11 @@
             <div class="pseudo-button clickable" onclick="decreaseFontSize()">--</div>
         </p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()"></span>I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
-        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit" onclick="toggleWordLimit()"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
+        <p><span><input type="checkbox" class="input-inline" id="checkboxWordlimit"></span>I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBackspace"></span> Disable Backspace.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
         <p><span><input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
-        <!-- <button onclick="toggleBlur()">Toggle Blur</button>-->
-        <!--<button onclick="toggleTimer()">Start Timer</button>
-        <button onclick="toggleWordLimit()">Lock at 10 Words</button>-->
-        <!-- <button onclick="toggleBackspaceBlock()">Block Backspace</button>-->
-        <!--<button onclick="toggleInputLock(true)">Unlock textarea</button> -->    
         <button onclick="starteDieMaschine()">Start writing!</button>
-        <!--<button onclick="toggleOverlay()">Turn on UI (Wordcount and Timer, if set)</button>-->
     </div>
 
     <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
