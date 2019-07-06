@@ -68,6 +68,7 @@ body {
     grid-area: head;
 }
 
+
 #results {
     grid-area: result;
     display: none;

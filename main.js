@@ -1,8 +1,4 @@
 var fontSizes = ['0.5em', '1em', '2em', '3em'];
-var textarea = document.getElementById("textarea");
-var options = document.getElementById("options");
-var header = document.getElementById("header");
-var results = document.getElementById("results");
 var timerUpdateInterval;
 var duration, minutes, seconds;
 var timer = 30;
@@ -16,34 +12,44 @@ var inputLock = false;
 var showOverlay = false;
 var activeFS = 2; //font size for textarea
 
-// deactivate textarea
-textarea.setAttribute("contenteditable", false);
+var $textarea;
+var $options;
+var $header;
+var $results;
 
-// set default font size
-setFontSize();
 
-// register events
-textarea.addEventListener('input', updateText);
-textarea.addEventListener('keydown', handleKeydown);
+$( document ).ready(function() {
+    $textarea = $("#textarea");//document.getElementById("textarea");
+    $options = $("#options");
+    $header = $("#header");
+    $results = $("#results");
+    $textarea.attr("contenteditable", "false");
 
-// hotfix to make sure blurred text gets blurred again
-// i'am too lazy to fiddle with the checkbox states, reloading
-// and stuff. you know. don't bother me. thanks.
-if(document.getElementById("checkboxBlind").checked == true && blurMode == true) {
-    toggleBlur();
-}
+    // register events
+    $textarea.on('input', updateText);
+    $textarea.on('keydown', handleKeydown);
+
+    // set default font size
+    setFontSize();
+
+    // hotfix to make sure blurred text gets blurred again
+    // i'am too lazy to fiddle with the checkbox states, reloading
+    // and stuff. you know. don't bother me. thanks.
+    if($("#checkboxBlind").checked == true && blurMode == true) {
+        toggleBlur();
+    }
+})
 
 // activate input, deactivate preferences
 function starteDieMaschine() {
     wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
     document.getElementById("maxwords").innerText = wordLimit;
-    textarea.setAttribute("contenteditable", true);
-    textarea.innerText = "";
-    textarea.focus();
+    $textarea.attr("contenteditable", true);
+    $textarea.text("");
+    $textarea.focus();
 
     toggleOptions();
     toggleHeader();
-    toggleResults();
 
     if(document.getElementById("checkboxTimer").checked == true)
     {
@@ -79,7 +85,7 @@ function starteDieMaschine() {
     }
 }
 
-function toggleGridLayout() {
+/*function toggleGridLayout() {
     if(document.getElementById("body").className == "gridlayout") {
         document.getElementById("body").classList.remove("gridlayout");
         document.getElementById("body").classList.add("gridlayout-fullscreen");
@@ -88,33 +94,18 @@ function toggleGridLayout() {
         document.getElementById("body").classList.remove("gridlayout-fullscreen");
         document.getElementById("body").classList.add("gridlayout");
     }
-}
+}*/
 
 function toggleOptions() {
-    if(options.style.display == "none")
-    {
-        options.style.display = "block";
-    } else {
-        options.style.display = "none";
-    }
+    $options.toggle();
 }
 
 function toggleHeader() {
-    if(header.style.display == "none")
-    {
-        header.style.display = "block";
-    } else {
-        header.style.display = "none";
-    }
+    $header.toggle();
 }
 
 function toggleResults() {
-    if(results.style.display == "none")
-    {
-        results.style.display = "block";
-    } else {
-        results.style.display = "none";
-    }
+    $results.toggle();
 }
 
 
