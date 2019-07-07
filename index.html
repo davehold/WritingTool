@@ -6,7 +6,7 @@
         <script src="./js/libs/jquery.popupoverlay.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body id="body" class="gridlayout">
+    <body id="body">
 
         <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
         
@@ -18,6 +18,10 @@
                 <button class="small-button results-popup_open clickable" onclick="toggleResults()">Toggle Results</button>
                 <button id="toggleOverlay" class="clickable">Toggle Overlay</button>-->
             </div>
+        </div>
+
+        <div id="random-image-popup" class="popup">
+            {{ image }}
         </div>
 
         <div id="results-popup" class="popup results">
@@ -50,6 +54,7 @@
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace"></span> Disable Backspace.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
+                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxPicture" onclick="togglePicture()"></span> Show me a nice picture.</p>
 
                 <div class="flex-container">
                     <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Start writing!</button>
@@ -59,6 +64,21 @@
         
         <script src="./js/main-dist.js"></script>
         <script>
+            $('#random-image-popup').popup({
+                    background: false,
+                    horizontal: 'right',
+                    vertical: 'bottom',
+                    autoopen: false,
+                    keepfocus: false,
+                    autozindex: true,
+                    blur: false,
+                    onclose: function() {
+                        $("#checkboxPicture").prop("checked", false);
+                    }
+                });
+
+            $('#random-image-popup').html('<img class="random-image-popup_close" src="https://picsum.photos/400/300.jpg">');
+            
             $( "#toggleOverlay" ).click(function() {
                 $("#overlay").animate({
                     opacity: 0.25,

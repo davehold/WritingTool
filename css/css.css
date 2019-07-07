@@ -88,6 +88,7 @@ transition: all 0.3s;
   margin: auto;
   resize: both;
   width: 90vw;  
+  min-height: 90vh;
   transition: filter 0.5s ease-in;
   font-size: 2em;
   background: none;    

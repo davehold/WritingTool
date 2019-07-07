@@ -58,6 +58,10 @@ $( document ).ready(function() {
     }
 })
 
+function togglePicture() {
+    $('#random-image-popup').popup('toggle');   
+}
+
 // activate input, deactivate preferences
 function starteDieMaschine() {
     wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
@@ -66,6 +70,8 @@ function starteDieMaschine() {
     $textarea.text("");
     $textarea.focus();
     $textarea.attr("placeholder", "test");
+
+    $('#start-popup').popup('hide');
 
     //toggleOptions();
     //toggleHeader();
