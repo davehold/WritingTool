@@ -16,14 +16,32 @@ var $textarea;
 var $options;
 var $header;
 var $results;
-
-
+ 
 $( document ).ready(function() {
     $textarea = $("#textarea");//document.getElementById("textarea");
     $options = $("#options");
     $header = $("#header");
     $results = $("#results");
     $textarea.attr("contenteditable", "false");
+
+    // Initialize popup plugin
+    $('#start-popup').popup({
+        transition: 'all 0.3s',
+        autoopen: true,
+        opacity: 0.2,
+        escape: false,
+        scrolllock: true,
+        blur: false
+      });
+
+    $('#results-popup').popup({
+        transition: 'all 0.3s',
+        autoopen: false,
+        opacity: 0.2,
+        escape: false,
+        scrolllock: true,
+        blur: false
+      });
 
     // register events
     $textarea.on('input', updateText);
@@ -43,19 +61,21 @@ $( document ).ready(function() {
 // activate input, deactivate preferences
 function starteDieMaschine() {
     wordLimit = parseInt(document.getElementById("maxwordcountInput").value, 10);
-    document.getElementById("maxwords").innerText = wordLimit;
+    document.getElementById("maxwords").innerText = '/' + wordLimit;
     $textarea.attr("contenteditable", true);
     $textarea.text("");
     $textarea.focus();
+    $textarea.attr("placeholder", "test");
 
-    toggleOptions();
-    toggleHeader();
+    //toggleOptions();
+    //toggleHeader();
 
     if(document.getElementById("checkboxTimer").checked == true)
     {
         timerMode = true;
         timer = parseInt(document.getElementById("timerInput").value, 10)*60;
     } else {
+        document.getElementById("timer-ui").style.display = "none";
         timerMode = false;
     }
 
@@ -105,7 +125,8 @@ function toggleHeader() {
 }
 
 function toggleResults() {
-    $results.toggle();
+    //$results.toggle();
+    setInputLock(true);
 }
 
 
@@ -250,10 +271,11 @@ function getCurrentWord() {
 }
 
 function countWords() {
-    var currentTextareaContent = textarea.innerText.split(' ');
+    //var currentTextareaContent = textarea.innerText.split(' ');
+    var currentTextareaContent = textarea.innerText.split(/\s+/);
     var wordcount = currentTextareaContent.length;
     
-    return wordcount;
+    return wordcount-1;
 }
 
 function toggleBackspaceBlock() {
@@ -268,7 +290,7 @@ function toggleBackspaceBlock() {
 function toggleOverlay() {
     if(document.getElementById("checkboxOverlay").checked == true) 
     {
-        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "flex";
         showOverlay = true;
     } else {
         document.getElementById("overlay").style.display = "none";
