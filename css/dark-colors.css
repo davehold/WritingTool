@@ -1,0 +1,52 @@
+/* this file defines the colors which get changed for the dark mode */
+
+body {
+  color: rgb(206, 206, 206);
+  background-color: #404040;
+}
+
+.popup {
+    background-color: #404040;
+    border: 1px solid #454545;
+    box-shadow: inset 0px 0px 54px -18px rgba(0,0,0,0.33);
+    box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
+}
+
+#overlay {
+  background-color: #404040;
+  color: #fff;
+  border: 1px solid #454545;
+  box-shadow: inset 0px 0px 54px -18px rgba(0,0,0,0.33);
+  box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
+}
+
+.input-inline {
+  color: inherit;
+  background-color: #404040;
+  border-bottom: 1px solid rgb(107, 107, 107) !important;
+}
+
+.small-button {
+  background-color: rgb(80, 80, 80);
+  color: white;
+}
+
+.positive {
+  background-color: rgb(80, 80, 80);
+  color: white;
+}
+
+a {
+  color: #bdaaaa;
+}
+
+a:visited {
+  color: #919191;
+}
+
+#quick-settings {
+  background-color: #404040;
+  border: 1px solid #454545;
+  box-shadow: inset 0px 0px 54px -18px rgba(0,0,0,0.33);
+  box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
+}

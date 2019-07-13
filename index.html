@@ -2,26 +2,34 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./css/css-dist.css">
+        <META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="*">
+        <link rel="stylesheet" id="stylesheet" href="./css/dark-colors.css" disabled>
         <script src="./js/libs/jquery.js"></script>
         <script src="./js/libs/jquery.popupoverlay.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body id="body">
 
-        <div id="textarea" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
+        <div id="textarea" class="" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
         
         <div id="overlay-wrapper">
             <div id="overlay">
-                <p id="timer-ui">Time left: <span id="timer" class="">00</span></p>
-                <p>Wordcount: <span title="This is your wordcount" class="wordcount">0</span><span id="maxwords" title="This is the maximum amount of words you can type" class="">0</span></p>
-                <!--<button class="small-button clickable" onclick="forceBlurToggle()">Toggle Blur</button>
-                <button class="small-button results-popup_open clickable" onclick="toggleResults()">Toggle Results</button>
-                <button id="toggleOverlay" class="clickable">Toggle Overlay</button>-->
+                <p id="timer-ui">Time left: <span id="timer" class="">00:00</span></p>
+                <p id="wordcount-ui">Wordcount: <span title="This is your wordcount" class="wordcount">0</span><span id="maxwords" title="This is the maximum amount of words you can type" class="">0</span></p>
             </div>
         </div>
 
         <div id="random-image-popup" class="popup">
             {{ image }}
+        </div>
+
+        <div id="quick-settings">
+            <div id="qs-click" class="clickable"><b>Quick Settings</b></div>
+            <div id="qs-menu">
+                <p class="clickable" onclick="toggleBlur()">Toggle Blur</p>
+                <p class="results-popup_open clickable" onclick="toggleResults()">Stop writing</p>
+                <p class="clickable" id="toggleOverlay" onclick="toggleOverlay()">Toggle Overlay </button>
+            </div>
         </div>
 
         <div id="results-popup" class="popup results">
@@ -31,22 +39,22 @@
                 <div>Here is your text:</div>
                 <p><textarea id="typedtext"></textarea></p>
                 <button class="big-button clickable" onclick="location.reload()">Restart</button>
-                <button class="big-button results-popup_close clickable" onclick="toggleResults()">Continue Writing</button>
-            </div>    
+            </div>
         </div>
 
         <div id="start-popup" class="popup">
             <div id="header">
                 <h1>Writing Tool</h1>
                 <p>Version: 1.5</p>
-                <p>Made by: <a href="https://github.com/davehold" target="_blank">Dave Leibhold</a> / <a href="https://github.com/davehold/WritingTool" target="_blank">View source</a></p>
+                <p>Made by <a href="https://github.com/davehold" target="_blank">Dave Leibhold</a> with <a href="https://jquery.com/">jquery</a> and <a href="https://prepros.io/">Prepros</a>.</p>
+                <p>Released under MIT License: <a href="https://github.com/davehold/WritingTool" target="_blank">Source and license</a></p>
             </div>
 
             <div id="options">
                 <p>
-                    <button class="big-button clickable" onclick="increaseFontSize()">++</button>
+                    <button class="small-button clickable" onclick="increaseFontSize()">++</button>
                     <span>current font size: </span><span id="currentFontSize">0</span>
-                    <button class="big-button clickable" onclick="decreaseFontSize()">--</button>
+                    <button class="small-button clickable" onclick="decreaseFontSize()">--</button>
                 </p>
                 
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxTimer" onclick="toggleTimer()"></span> I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
@@ -54,40 +62,16 @@
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace"></span> Disable Backspace.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxPicture" onclick="togglePicture()"></span> Show me a nice picture.</p>
+                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxPicture" onclick="togglePicture()"></span> Show me a nice random picture.<br>(From the external server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)</p>
 
                 <div class="flex-container">
                     <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Start writing!</button>
+                    <button class="big-button clickable positive" id="darkModeButton" onclick="">Dark Mode 👻</button>
                 </div>
             </div>
         </div>
         
         <script src="./js/main-dist.js"></script>
-        <script>
-            $('#random-image-popup').popup({
-                    background: false,
-                    horizontal: 'right',
-                    vertical: 'bottom',
-                    autoopen: false,
-                    keepfocus: false,
-                    autozindex: true,
-                    blur: false,
-                    onclose: function() {
-                        $("#checkboxPicture").prop("checked", false);
-                    }
-                });
-
-            $('#random-image-popup').html('<img class="random-image-popup_close" src="https://picsum.photos/400/300.jpg">');
-            
-            $( "#toggleOverlay" ).click(function() {
-                $("#overlay").animate({
-                    opacity: 0.25,
-                    height: 10
-                }, 500, function() {
-                    // animation beendet
-                })
-            })
-        </script>
     </body>
 
 </html>

@@ -62,13 +62,35 @@ button {
   box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
 }
 
+#quick-settings {
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: auto;
+  padding: 1em;
+  bottom: -8rem;
+  opacity: 0.2;
+  background-color: #ffffff;
+  overflow: hidden;
+  border: 1px solid #e3e3e3;
+  border-radius: 15px;
+  box-shadow: 5px 10px;
+  box-shadow: inset 0px 0px 54px -18px rgba(0,0,0,0.33);
+  box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
+  z-index: 2;
+}
+
 .results {
   min-width: 50%;
 }
 
 .flex-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.flex-container > button {
+  padding: 1rem;
 }
 
 #fade_wrapper,
@@ -89,15 +111,11 @@ transition: all 0.3s;
   resize: both;
   width: 90vw;  
   min-height: 90vh;
-  transition: filter 0.5s ease-in;
+  transition: all 0.5s ease-in;
   font-size: 2em;
   background: none;    
   outline: none;
 } 
-
-#maxwords {
-  
-}
 
 /* toggle blur for textarea */
 #textarea.active {
@@ -109,8 +127,11 @@ transition: all 0.3s;
 }
 
 #timer {
-  
   font-weight: bold;
+}
+
+#timer-ui {
+  display: none;
 }
 
 #typedtext {
@@ -139,47 +160,32 @@ transition: all 0.3s;
   text-align: right;
 }
 
-#overlay-wrapper  {}
-  
-
 #overlay {  
   position: fixed;
   overflow: hidden;
-  display: flex;
+  display: none;
   justify-content: center;
-  
-  /*display: none;*/
-  border-radius: 20px 20px 0 0 ;
   width: 100%;
-  
   bottom: 0;
   z-index: 2;
   background-color: #ffffff;
   color: #000;
   padding: 1em;
-  border: 1px solid #e3e3e3;
+
+  border-radius: 20px 20px 0 0 ;
   border-radius: 15px;
   box-shadow: 5px 10px;
   box-shadow: inset 0px 0px 54px -18px rgba(0,0,0,0.33);
   box-shadow: 0px 0px 54px -18px rgba(0,0,0,0.33);
-  opacity: 0.7;
+  opacity: 0;
 }
 
 #overlay > p {
   padding: 0 1em;
 }
 
-.overlay-wordcount {
-  top: 60%;
-  left: 50%;
-  font-size: 1rem;
-}
-
-.overlay-wordcount-max {
-  color: #56546949;
-  top: 80%;
-  left: 50%;
-  font-size: 1rem;
+#wordcount-ui {
+  display: none;
 }
 
 .clickable {
