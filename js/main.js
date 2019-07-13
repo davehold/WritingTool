@@ -72,7 +72,7 @@ $( document ).ready(function() {
     $("#textarea").click(function() {
         // hide "quick settings" popup
         $("#quick-settings").animate({
-            bottom: "-8em",
+            bottom: "-11em",
             opacity: "0.1"
         }, 200)
     })
