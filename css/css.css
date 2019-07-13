@@ -68,7 +68,7 @@ button {
   left: 0;
   top: auto;
   padding: 1em;
-  bottom: -8rem;
+  bottom: -8em;
   opacity: 0.2;
   background-color: #ffffff;
   overflow: hidden;
@@ -103,19 +103,18 @@ transition: all 0.3s;
 }
 
 #textarea {
-  -moz-appearance: textarea;
-  -webkit-appearance: textarea;
-  appearance: textarea;    
+  appearance: textarea;
   padding-top: 5vh;
   margin: auto;
   resize: both;
-  width: 90vw;  
-  min-height: 90vh;
   transition: all 0.5s ease-in;
   font-size: 2em;
-  background: none;    
+  background: none;
   outline: none;
-} 
+  width: 90vw;
+  min-height: 90vh;
+}
+
 
 /* toggle blur for textarea */
 #textarea.active {
