@@ -13,6 +13,13 @@ var activeFS = 2; //font size for textarea
 var darkmode = false;
 var overlay = false;
 
+var owm = false;
+var owm2 = true;
+var owm_stack = "";
+var owm2_stack = "";
+var filter = '<span style="filter: blur(0);">';
+var filter_end = '</span>';
+var $filter = $('<span style="filter: blur(13px);"></span>')
 var $textarea;
 var $options;
 var $header;
@@ -28,6 +35,9 @@ $( document ).ready(function() {
     // register events
     $textarea.on('input', updateText);
     $textarea.on('keydown', handleKeydown);
+
+    $("#current-word").focus();
+    $("#current-word").on('keydown', handleKeydown);
 
     // set default font size
     setFontSize();
@@ -173,6 +183,30 @@ function handleKeydown(event)
             if (typeof (event.preventDefault) == 'function') event.preventDefault();
             
             return false;
+        }
+    }
+
+    // If "one word mode" is active
+    if(owm) {
+        // keycode 32 = space, keycode 13 = enter
+        if(event.keyCode === 32 || event.keyCode === 13) {
+            owm_stack += $textarea.text();
+            $textarea.text("");
+        }
+    }
+
+    // in one word mode 2 you able to see the whole text
+    // but blurred. Only the current word isn't blurred
+    if(owm2) {
+        // keycode 32 = space, keycode 13 = enter
+        if(event.keyCode === 32 || event.keyCode === 13) {
+            owm2_stack = $("#current-word").text();
+            $("#current-word").text("");
+            $("#written-text").append(owm2_stack);
+            //owm2_stack += $textarea.text();
+            //$filter.innerHTML = owm2_stack;
+            //$textarea.after($filter);
+            //$textarea.text(filter + owm2_stack + filter_end);
         }
     }
 
