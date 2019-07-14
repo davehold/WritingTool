@@ -10,13 +10,10 @@
     </head>
     <body id="body">
         
-        <!--<div id="textarea" class="" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>-->
-        <div id="textarea2" class="">
-            <div id="written-text" class="tatemp" style="filter: blur(3px);">Start Writing</div>
-            <div id="current-word" class="tatemp" style="filter:none;" contenteditable spellcheck="false">write...</div>
-            
-        </div>
-        
+        <div id="textarea" class="" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
+        <form>
+            <textarea id="wordcountarea"></textarea>
+        </form>
 
         <div id="overlay-wrapper">
             <div id="overlay">
@@ -37,7 +34,7 @@
                 <p class="clickable" id="toggleOverlay" onclick="toggleOverlay()">Toggle Overlay </button>
                 <p>
                     <button class="small-button clickable" onclick="increaseFontSize()">++</button>
-                    <span>Size: </span><span id="currentFontSize">0</span>
+                    <span>Size: </span><span id="qscurrentFontSize">0</span>
                     <button class="small-button clickable" onclick="decreaseFontSize()">--</button>
                 </p>
             </div>
@@ -51,6 +48,11 @@
                 <p><textarea id="typedtext"></textarea></p>
                 <button class="big-button clickable" onclick="location.reload()">Restart</button>
             </div>
+        </div>
+
+        <div id="oneword-popup" class="popup">
+            <div id="owm-input" style="appearance: textarea; font-size: 4em; min-width: 1rem; resize: both;" contenteditable spellcheck="false"></div>
+            <button class="oneword-popup_close">Stop</button>
         </div>
 
         <div id="start-popup" class="popup">
@@ -69,11 +71,12 @@
                 </p>
                 
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxTimer" onclick="toggleTimer()"></span> I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxWordlimit"></span> I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
+                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxWordLimit"></span> I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace"></span> Disable Backspace.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
                 <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxPicture" onclick="togglePicture()"></span> Show me a nice random picture.<br>(From the external server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)</p>
+                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOWM"></span> One Word Mode</p>
 
                 <div class="flex-container">
                     <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Start writing!</button>

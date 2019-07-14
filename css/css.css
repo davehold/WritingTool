@@ -117,16 +117,26 @@ transition: all 0.3s;
 
 .tatemp {
   appearance: textarea;
+  filter: blur(13px);
   padding-top: 5vh;
-  margin: auto;
+  margin: auto 3em;
   resize: both;
   transition: all 0.5s ease-in;
   font-size: 2em;
   background: none;
   outline: none;
-  width: 90vw;
-  max-width: 90vw;
-  min-height: 90vh;
+}
+
+.tatemp2 {
+  display: block;
+  position: absolute;
+  font-size: 2em;
+  border: 1px solid #d3e3d3;
+  background: #e3e3e39a;
+  
+  top: 50%;
+  left: 50%;
+
 }
 
 /* toggle blur for textarea */

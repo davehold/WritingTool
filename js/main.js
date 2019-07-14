@@ -14,9 +14,8 @@ var darkmode = false;
 var overlay = false;
 
 var owm = false;
-var owm2 = true;
-var owm_stack = "";
-var owm2_stack = "";
+//var owm_stack = "";
+
 var filter = '<span style="filter: blur(0);">';
 var filter_end = '</span>';
 var $filter = $('<span style="filter: blur(13px);"></span>')
@@ -35,9 +34,6 @@ $( document ).ready(function() {
     // register events
     $textarea.on('input', updateText);
     $textarea.on('keydown', handleKeydown);
-
-    $("#current-word").focus();
-    $("#current-word").on('keydown', handleKeydown);
 
     // set default font size
     setFontSize();
@@ -58,7 +54,12 @@ $( document ).ready(function() {
         opacity: 0.2,
         escape: false,
         scrolllock: true,
-        blur: false
+        blur: false,
+        opentransitionend: function() {
+            if(owm){
+                $("#oneword-popup").popup('hide');
+            }
+        }
     });
 
     $('#random-image-popup').popup({
@@ -74,7 +75,27 @@ $( document ).ready(function() {
         },
         onopen: function() {
             // Load a random image
-    $('#random-image-popup').html('<img class="random-image-popup_close" src="https://picsum.photos/400/300.jpg">');
+            $('#random-image-popup').html('<img class="random-image-popup_close" src="https://picsum.photos/400/300.jpg">');
+        }
+    });
+
+    // One word mode popup
+    $('#oneword-popup').popup({
+        transition: 'all 0.3s',
+        autoopen: false,
+        opacity: 0.2,
+        escape: false,
+        scrolllock: false,
+        blur: false,
+        opentransitionend: function() {
+            $("#owm-input").on('keydown', handleKeydown);
+            $("#owm-input").on('input', updateText);
+            $("#owm-input").focus();
+            $textarea.text('');
+            toggleBlur();
+        },
+        onclose: function() {
+            toggleBlur();
         }
     });
 
@@ -114,7 +135,6 @@ $( document ).ready(function() {
     if($("#checkboxBlind").prop("checked")) {
         toggleBlur();
     }
-
 }) // If dec ready end
 
 // 
@@ -140,7 +160,7 @@ function starteDieMaschine() {
     if($("#checkboxWordLimit").prop("checked"))
     {
         $("#wordcount-ui").show();
-        $("#maxwords").css("display", inline);
+        $("#maxwords").css("display", "inline");
         wordLimitActive = true
     } else {
         $("#maxwords").css("display", "none");
@@ -168,10 +188,27 @@ function starteDieMaschine() {
     if(timerMode) {
         timerUpdateInterval = setInterval(startTimer, 1000);
     }
+
+        // if one word mode is set
+    if($("#checkboxOWM").prop("checked")) {
+        owm = true;
+        $("#oneword-popup").popup('show');
+    }
 }
+
+function appendOWMInput() {
+    // Append new word to textarea
+    $textarea.append($("#owm-input").text());
+            
+    // Clear input
+    $("#owm-input").text("");
+}
+
+
 
 function handleKeydown(event) 
 {
+    console.log(event.keyCode);
     // capturing event
     event = event || window.event;
 
@@ -186,32 +223,54 @@ function handleKeydown(event)
         }
     }
 
+    if(event.keyCode === 32 || event.keyCode === 13) {
+        if (event.keyCode === 13) { $textarea.append("<br/>"); }
+        // If "one word mode" is active
+        if(owm) {
+            appendOWMInput();
+
+            // prevent newline in one word mode 
+            if (event.keyCode === 13) {
+                if (typeof (event.preventDefault) == 'function') event.preventDefault();
+                return false;
+            }
+        }
+
+        if(wordLimitActive) {
+            if (countWords() + 1 > wordLimit) {
+                // the next time the user hits space
+                
+                    setInputLock(true);
+                    toggleResults();
+                    
+                    blurMode = false;
+                    $textarea.removeClass("active");
+                    // preventing the space key from doing something else at this point
+                    if (typeof (event.preventDefault) == 'function') event.preventDefault();
+                    
+                    return false;
+                
+            }
+        }
+    }
+/*
     // If "one word mode" is active
     if(owm) {
-        // keycode 32 = space, keycode 13 = enter
         if(event.keyCode === 32 || event.keyCode === 13) {
-            owm_stack += $textarea.text();
-            $textarea.text("");
+            // Append new word to textarea
+            $textarea.append($("#owm-input").text() + " ");
+            
+            // Clear input
+            $("#owm-input").text('');
+
+            if(event.keyCode === 13){
+                if (typeof (event.preventDefault) == 'function') event.preventDefault();
+            }
         }
     }
-
-    // in one word mode 2 you able to see the whole text
-    // but blurred. Only the current word isn't blurred
-    if(owm2) {
-        // keycode 32 = space, keycode 13 = enter
-        if(event.keyCode === 32 || event.keyCode === 13) {
-            owm2_stack = $("#current-word").text();
-            $("#current-word").text("");
-            $("#written-text").append(owm2_stack);
-            //owm2_stack += $textarea.text();
-            //$filter.innerHTML = owm2_stack;
-            //$textarea.after($filter);
-            //$textarea.text(filter + owm2_stack + filter_end);
-        }
-    }
-
+*/
     // If word limit is set call the function
-    if(wordLimitActive)
+    /*if(wordLimitActive)
     {
        if (countWords() + 1 > wordLimit)
         {
@@ -225,10 +284,11 @@ function handleKeydown(event)
                 $textarea.removeClass("active");
                 // preventing the space key from doing something else at this point
                 if (typeof (event.preventDefault) == 'function') event.preventDefault();
+                
                 return false;
             }
         }
-    }
+    } */
 }
 
 function startTimer() {
@@ -319,7 +379,8 @@ function toggleOverlay() {
 // returns the current word count
 function countWords() {
     // split the content of the textarea and filter empty fields
-    var currentTextareaContent = $textarea.text().split(/\s+/).filter(function(el) { return el });
+    // /[^_0-9a-zA-Z]/g, " ").trim().split(/\s+/).length
+    var currentTextareaContent = $textarea.text().split(/\s+/g).filter(function(el) { return el });
     var count = currentTextareaContent.length;
     
     return count;
@@ -356,6 +417,7 @@ function decreaseFontSize() {
 function setFontSize() {
     $textarea.css("font-size", getCurrentFontSize());
     $("#currentFontSize").html(getCurrentFontSize());
+    $("#qscurrentFontSize").html(getCurrentFontSize());
 }
 
 function updateText(event)
