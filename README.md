@@ -44,6 +44,7 @@ See the LICENSE file for license rights and limitations (MIT).
       * "Toggle Blur" button 
       * "Result" button - to see results anytime
       * "Toggle Overlay" button
+    + Added: One Word Mode
   
     Usability>
     * Refocus on textarea after hitting a button (like blur)
