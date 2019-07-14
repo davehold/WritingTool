@@ -14,18 +14,15 @@ var darkmode = false;
 var overlay = false;
 
 var owm = false;
-//var owm_stack = "";
+var owm_stack = "";
 
-var filter = '<span style="filter: blur(0);">';
-var filter_end = '</span>';
-var $filter = $('<span style="filter: blur(13px);"></span>')
 var $textarea;
 var $options;
 var $header;
 var $results;
  
 $( document ).ready(function() {
-    $textarea = $("#textarea");//document.getElementById("textarea");
+    $textarea = $("#textarea");
     $options = $("#options");
     $header = $("#header");
     $results = $("#results");
@@ -54,12 +51,7 @@ $( document ).ready(function() {
         opacity: 0.2,
         escape: false,
         scrolllock: true,
-        blur: false,
-        opentransitionend: function() {
-            if(owm){
-                $("#oneword-popup").popup('hide');
-            }
-        }
+        blur: false
     });
 
     $('#random-image-popup').popup({
@@ -76,26 +68,6 @@ $( document ).ready(function() {
         onopen: function() {
             // Load a random image
             $('#random-image-popup').html('<img class="random-image-popup_close" src="https://picsum.photos/400/300.jpg">');
-        }
-    });
-
-    // One word mode popup
-    $('#oneword-popup').popup({
-        transition: 'all 0.3s',
-        autoopen: false,
-        opacity: 0.2,
-        escape: false,
-        scrolllock: false,
-        blur: false,
-        opentransitionend: function() {
-            $("#owm-input").on('keydown', handleKeydown);
-            $("#owm-input").on('input', updateText);
-            $("#owm-input").focus();
-            $textarea.text('');
-            toggleBlur();
-        },
-        onclose: function() {
-            toggleBlur();
         }
     });
 
@@ -192,23 +164,11 @@ function starteDieMaschine() {
         // if one word mode is set
     if($("#checkboxOWM").prop("checked")) {
         owm = true;
-        $("#oneword-popup").popup('show');
     }
 }
 
-function appendOWMInput() {
-    // Append new word to textarea
-    $textarea.append($("#owm-input").text());
-            
-    // Clear input
-    $("#owm-input").text("");
-}
-
-
-
 function handleKeydown(event) 
 {
-    console.log(event.keyCode);
     // capturing event
     event = event || window.event;
 
@@ -223,11 +183,12 @@ function handleKeydown(event)
         }
     }
 
-    if(event.keyCode === 32 || event.keyCode === 13) {
-        if (event.keyCode === 13) { $textarea.append("<br/>"); }
+    if(event.keyCode === 32 || event.keyCode === 13) 
+    {
         // If "one word mode" is active
         if(owm) {
-            appendOWMInput();
+            owm_stack += $textarea.text();
+            $textarea.text("");
 
             // prevent newline in one word mode 
             if (event.keyCode === 13) {
@@ -237,58 +198,23 @@ function handleKeydown(event)
         }
 
         if(wordLimitActive) {
-            if (countWords() + 1 > wordLimit) {
+            // Ugly hotfix to get the wordcount right in one word mode
+            var add_owm = 0;
+            if(owm) { add_owm = 1 }
+
+            if (wordCount + add_owm >= wordLimit) {
                 // the next time the user hits space
-                
+                if(event.keyCode === 32) // "32" = space
+                { 
                     setInputLock(true);
                     toggleResults();
                     
                     blurMode = false;
                     $textarea.removeClass("active");
-                    // preventing the space key from doing something else at this point
-                    if (typeof (event.preventDefault) == 'function') event.preventDefault();
-                    
-                    return false;
-                
+                }
             }
         }
     }
-/*
-    // If "one word mode" is active
-    if(owm) {
-        if(event.keyCode === 32 || event.keyCode === 13) {
-            // Append new word to textarea
-            $textarea.append($("#owm-input").text() + " ");
-            
-            // Clear input
-            $("#owm-input").text('');
-
-            if(event.keyCode === 13){
-                if (typeof (event.preventDefault) == 'function') event.preventDefault();
-            }
-        }
-    }
-*/
-    // If word limit is set call the function
-    /*if(wordLimitActive)
-    {
-       if (countWords() + 1 > wordLimit)
-        {
-            // the next time the user hits space
-            if(event.keyCode === 32) // "32" = space
-            { 
-                setInputLock(true);
-                toggleResults();
-                
-                blurMode = false;
-                $textarea.removeClass("active");
-                // preventing the space key from doing something else at this point
-                if (typeof (event.preventDefault) == 'function') event.preventDefault();
-                
-                return false;
-            }
-        }
-    } */
 }
 
 function startTimer() {
@@ -377,11 +303,10 @@ function toggleOverlay() {
 }
 
 // returns the current word count
-function countWords() {
+function countWords(words) {
     // split the content of the textarea and filter empty fields
-    // /[^_0-9a-zA-Z]/g, " ").trim().split(/\s+/).length
-    var currentTextareaContent = $textarea.text().split(/\s+/g).filter(function(el) { return el });
-    var count = currentTextareaContent.length;
+    var wordArray = words.split(/\s+/g).filter(function(el) { return el });
+    var count = wordArray.length;
     
     return count;
 }
@@ -422,12 +347,19 @@ function setFontSize() {
 
 function updateText(event)
 {
-    var textContent = $textarea.text();
+    // If one word mode is active the variable owm_stack
+    // is used to save to whole text.
+    if(owm) {
+        var textContent = owm_stack;
+    } else {
+        var textContent = $textarea.text();
+    }
+    
     var $wc = $(".wordcount");              // get all elements with this classname 
 
-    wordCount = countWords();
+    wordCount = countWords(textContent);
     $("#typedtext").text( textContent );
-    
+
     $wc.eq(0).text(wordCount);
     $wc.eq(1).text(wordCount);
 }
