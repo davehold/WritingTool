@@ -1,5 +1,6 @@
-var fontSizes = ['0.5em', '1em', '2em', '3em'];
+var fontSizes = ['0.5em', '1em', '1.5em', '2em', '2.5em', '3em', '3.5em', '4em'];
 var timerUpdateInterval;
+var articleTimer;
 var minutes, seconds;
 var timer = 30;
 var timerMode = false;
@@ -12,7 +13,9 @@ var wordCount = 0;
 var activeFS = 2; //font size for textarea
 var darkmode = false;
 var overlay = false;
-
+var lang = "en";
+var wiki = "wikipedia";
+var wikiAPI = "https://"+lang+"."+wiki+".org/w/api.php?callback=?";
 var owm = false;
 var owm_stack = "";
 
@@ -75,7 +78,7 @@ $( document ).ready(function() {
     $("#textarea").click(function() {
         // hide "quick settings" popup
         $("#quick-settings").animate({
-            bottom: "-11em",
+            bottom: "-13em",
             opacity: "0.1"
         }, 200)
     })
@@ -119,6 +122,9 @@ function starteDieMaschine() {
     $("#maxwords").text('/' + wordLimit);
     $('#start-popup').popup('hide');
 
+    // Build wiki API URL
+    wikiAPI = "https://"+lang+"."+wiki+".org/w/api.php?callback=?";
+
     if($("#checkboxTimer").prop("checked"))
     {
         timerMode = true;
@@ -161,7 +167,11 @@ function starteDieMaschine() {
         timerUpdateInterval = setInterval(startTimer, 1000);
     }
 
-        // if one word mode is set
+    if($("#checkboxRNDArticle").prop('checked')) {
+        articleTimer = setInterval(openWikiPopup, $("#articleTimerInput").val()*60000);
+    }
+    
+    // if one word mode is set
     if($("#checkboxOWM").prop("checked")) {
         owm = true;
     }
@@ -338,7 +348,7 @@ function decreaseFontSize() {
 }
 
 // set font size for the text area
-// and show the current selecting on the front end
+// and show the current selection on the front end
 function setFontSize() {
     $textarea.css("font-size", getCurrentFontSize());
     $("#currentFontSize").html(getCurrentFontSize());
@@ -371,4 +381,12 @@ function setInputLock(state) {
         timerMode = false;
         $textarea.attr("contenteditable", false); 
     }
+}
+
+function setLanguage(langVal) {
+    lang = langVal.value;
+}
+
+function setWiki(wikiVal) {
+    wiki = wikiVal.value;
 }
