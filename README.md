@@ -1,21 +1,29 @@
 # Writing Tool
 
+
 The idea behind this tool is 
 
 This is a weekend project of mine and was hacked together just for fun and learning purposes. 
-As a friend of mine liked the idea and had some good suggestions I started working on this project again. 
-The code is still a mess, but it works and I'm going to revamp it later on. 
+As a friend of mine liked the idea and had some good suggestions I started working on this project again.
+Please excuse the mess of a code (and my sloppy English), I'm still learning and working on it. But hey, at least it works.
+
+Your feedback is very much appreciated.
 
 ## Features
     * Write blind (written text gets blurred)
     * Set a time limit
-    * Set a length limit
+    * Set a word limit
     * Deactivate backspace
     * Get a nice random picture to hopefully get some inspiration
     * Bright and dark theme
+    * One Word Mode 
+    * Random english or german wikipedia articles for inspiration
 
-Dieses kleine Tool startete als kleines Lernprojekt. Ein Freund von mir fand daran allerdings Gefallen und hatte noch ein paar gute Ideen, die mich dazu motivierten noch weiter daran zu arbeiten. 
-Der Code ist immer noch sehr "experimentell", aber es funktioniert. Ich arbeite dran.
+**[GERMAN DESCRIPTION]**  
+Dieses kleine Tool startete als Lernprojekt und wurde in seiner ursprünglichen Form an einem Wochenende zusammengehackt. Ein Freund von mir fand daran Gefallen und hatte noch ein paar gute Ideen, die mich dazu motivierten noch weiter daran zu arbeiten.
+Bitte entschuldigt den unsauberen Code. Ich lerne und arbeite noch daran. Aber immerhin funktioniert es.
+
+Ich freue mich über jegliches Feedback.
 
 ## Funktionen
     * Blindschreiben (Text wird beim Schreiben verschwommen angezeigt)
@@ -24,6 +32,11 @@ Der Code ist immer noch sehr "experimentell", aber es funktioniert. Ich arbeite 
     * Deaktivierung der Rücktaste
     * Einblendung eines zufälligen und mit etwas Glück auch inspirierenden Bildes
     * Helles und dunkles Farbschema
+    * Ein-Wort-Modus (Du siehst lediglich das Wort, das du aktuell tippst)
+    * Zufälliger deutscher oder englischer Wikipedia-Artikel zur Inspiration
+
+# Contact
+E-Mail: post@dhold.net
 
 # License
 See the LICENSE file for license rights and limitations (MIT).
@@ -31,25 +44,10 @@ See the LICENSE file for license rights and limitations (MIT).
 
 ## Last Update
 
-# Beta 1.5:
+# Beta 1.6:
     Bugs>
-    + Fixed: Wordcount doesn't count if user hits enter
-    + Fixed: fixed wordcount()
-    + Fixed: other stuff I didn't keep track of
+    + Fixed: stuff I didn't keep track of
 
     Features>
-    + Added: Show random picture for inspiration
-    + Added: Dark-Theme Toggle
-    + Added: "Quick Settings" menu.
-      * "Toggle Blur" button 
-      * "Result" button - to see results anytime
-      * "Toggle Overlay" button
-    + Added: One Word Mode
-  
-    Usability>
-    * Refocus on textarea after hitting a button (like blur)
-    * Changed: Made the textbox bigger by default 
+    + Added: Wikipedia API-connection to get random articles from wikipedia and wiktionary (GER/ENG) for inspiration
 
-    General>
-    * Implemented jquery to speed up development and make code cleaner
-    * Rewrote and removed a lot of code

@@ -2,9 +2,8 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="./css/css-dist.css">
-        <META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="*">
         <link rel="stylesheet" id="stylesheet" href="./css/dark-colors.css" disabled>
-        <script src="./js/libs/jquery.js"></script>
+        <script src="./js/libs/jquery-min.js"></script>
         <script src="./js/libs/jquery.popupoverlay.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -29,6 +28,7 @@
                 <p class="clickable" onclick="toggleBlur()">Toggle Blur</p>
                 <p class="results-popup_open clickable" onclick="toggleResults()">Stop writing</p>
                 <p class="clickable" id="toggleOverlay" onclick="toggleOverlay()">Toggle Overlay </button>
+                <p class="wiki_open clickable">Get random article</p>
                 <p>
                     <button class="small-button clickable" onclick="increaseFontSize()">++</button>
                     <span>Size: </span><span id="qscurrentFontSize">0</span>
@@ -47,10 +47,16 @@
             </div>
         </div>
 
+        <div id="wiki" class="popup" style="max-width: 60vw">
+            <button class="big-button wiki_close clickable positive" style="float: right">Close</button>
+            <div id="wiki-pop-head"></div>
+            <div id="wiki-pop-text">[Fetching article]</div>
+        </div>
+
         <div id="start-popup" class="popup">
             <div id="header">
                 <h1>Writing Tool</h1>
-                <p>Version: 1.5</p>
+                <p>Version: 1.6</p>
                 <p>Made by <a href="https://github.com/davehold" target="_blank">Dave Leibhold</a> with <a href="https://jquery.com/">jquery</a> and <a href="https://prepros.io/">Prepros</a>.</p>
                 <p>Released under MIT License: <a href="https://github.com/davehold/WritingTool" target="_blank">Source and license</a></p>
             </div>
@@ -62,13 +68,76 @@
                     <button class="small-button clickable" onclick="decreaseFontSize()">--</button>
                 </p>
                 
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxTimer" onclick="toggleTimer()"></span> I want to write for <span><input type="tel" id="timerInput" class="input-inline" size="2" value="25"></span> minutes.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxWordLimit"></span> I want to write a maximum of <span><input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280"></span> words.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace"></span> Disable Backspace.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxBlind" onclick="toggleBlur()"></span> Let me write blind.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOverlay" onclick="toggleOverlay()"></span> Show me the wordcount and timer.</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxPicture" onclick="togglePicture()"></span> Show me a nice random picture.<br>(From the external server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)</p>
-                <p><span><input type="checkbox" class="input-inline regular-checkbox" id="checkboxOWM"></span> One Word Mode</p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()">
+                        <label for="checkboxTimer"></label>
+                    </span> 
+                    I want to write for 
+                    <span>
+                        <input type="tel" id="timerInput" class="input-inline" size="2" value="25">
+                    </span> minutes.
+                </p>
+                
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxWordLimit">
+                        <label for="checkboxWordLimit"></label>
+                    </span> I want to write a maximum of 
+                    <span>
+                        <input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280">
+                    </span> 
+                    words.
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace">
+                        <label for="checkboxBackspace"></label>
+                    </span> Disable Backspace.
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()">
+                        <label for="checkboxBlind"></label>
+                    </span> Let me write blind.
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()">
+                        <label for="checkboxOverlay"></label>
+                    </span> Show me the wordcount and timer.
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxPicture" onclick="togglePicture()">
+                        <label for="checkboxPicture"></label>
+                    </span> Show me a nice random picture.<br>(From the external server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxOWM">
+                        <label for="checkboxOWM"></label>
+                    </span> One Word Mode
+                </p>
+                <p>
+                    <span class="nicecheck">
+                        <input type="checkbox" class="input-inline" id="checkboxRNDArticle">
+                        <label for="checkboxRNDArticle"></label>
+                    </span> Show me a random article every <span><input type="tel" id="articleTimerInput" class="input-inline" size="1" value="5"></span> minutes.
+                </p>
+                <p>
+                    <span>Get the random 
+                        <select onchange="setLanguage(this)">
+                            <option value="en" selected="selected">english</option>
+                            <option value="de">german</option>
+                        </select> 
+                        articles from 
+                        <select onchange="setWiki(this)">
+                            <option value="wikipedia" selected="selected">Wikipedia.</option>
+                            <option value="wiktionary">Wiktionary.</option>
+                        </select>
+                    </span>
+                </p>
 
                 <div class="flex-container">
                     <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Start writing!</button>
@@ -78,6 +147,7 @@
         </div>
         
         <script src="./js/main-dist.js"></script>
+        <script src="./js/randomwiki.js"></script>
     </body>
 
 </html>
