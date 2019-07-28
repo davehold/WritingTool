@@ -1,8 +1,5 @@
 # Writing Tool
 
-
-The idea behind this tool is 
-
 This is a weekend project of mine and was hacked together just for fun and learning purposes. 
 As a friend of mine liked the idea and had some good suggestions I started working on this project again.
 Please excuse the mess of a code (and my sloppy English), I'm still learning and working on it. But hey, at least it works.
