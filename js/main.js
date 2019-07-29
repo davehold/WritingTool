@@ -17,7 +17,7 @@ var lang = "en";
 var wiki = "wikipedia";
 var wikiAPI = "https://"+lang+"."+wiki+".org/w/api.php?callback=?";
 var owm = false;
-var owm_stack = "";
+var owm_arr = [];
 
 var $textarea;
 var $options;
@@ -197,24 +197,23 @@ function handleKeydown(event)
     {
         // If "one word mode" is active
         if(owm) {
-            owm_stack += $textarea.text();
-            $textarea.text("");
-
-            // prevent newline in one word mode 
+            // prevent newline in one word mode
+            // 13 = enter
             if (event.keyCode === 13) {
                 if (typeof (event.preventDefault) == 'function') event.preventDefault();
-                return false;
+
+                owm_arr.push($textarea.text() + " ")
+            } else {
+                owm_arr.push($textarea.text())
             }
+            updateText();
+            $textarea.text("");
         }
 
         if(wordLimitActive) {
-            // Ugly hotfix to get the wordcount right in one word mode
-            var add_owm = 0;
-            if(owm) { add_owm = 1 }
-
-            if (wordCount + add_owm >= wordLimit) {
+            if (wordCount >= wordLimit) {
                 // the next time the user hits space
-                if(event.keyCode === 32) // "32" = space
+                if(event.keyCode === 32 || event.keyCode === 13) // "32" = space
                 { 
                     setInputLock(true);
                     toggleResults();
@@ -357,17 +356,19 @@ function setFontSize() {
 
 function updateText(event)
 {
-    // If one word mode is active the variable owm_stack
+    // If one word mode is active the array owm_arr
     // is used to save to whole text.
     if(owm) {
-        var textContent = owm_stack;
+        var textContent = owm_arr.join('');
+        wordCount = owm_arr.length;
     } else {
-        var textContent = $textarea.text();
+        var textContent = document.getElementById("textarea").innerText
+        wordCount = countWords(textContent);
     }
     
     var $wc = $(".wordcount");              // get all elements with this classname 
 
-    wordCount = countWords(textContent);
+    
     $("#typedtext").text( textContent );
 
     $wc.eq(0).text(wordCount);
