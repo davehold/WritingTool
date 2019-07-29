@@ -1,4 +1,7 @@
 # Writing Tool
+With Writing Tool authors can build their own environment for creative writing. You can restrict yourself by deactivating the backspace-key, hiding the actual text and/or set a time limit.
+You can also get a nice picture and a random Article from Wikipedia for inspiration, while writing.
+(Those functions get their data from external servers.)
 
 This is a weekend project of mine and was hacked together just for fun and learning purposes. 
 As a friend of mine liked the idea and had some good suggestions I started working on this project again.
@@ -16,8 +19,13 @@ Your feedback is very much appreciated.
     * One Word Mode 
     * Random english or german wikipedia articles for inspiration
 
-**[GERMAN DESCRIPTION]**  
-Dieses kleine Tool startete als Lernprojekt und wurde in seiner ursprünglichen Form an einem Wochenende zusammengehackt. Ein Freund von mir fand daran Gefallen und hatte noch ein paar gute Ideen, die mich dazu motivierten noch weiter daran zu arbeiten.
+**[GERMAN DESCRIPTION]**
+Mit Writing Tool können sich Autoren ihre eigene Umgebung zum kreativen Schreiben schaffen. Dafür ermöglicht es Autoren sich selbst beim Schreiben einzuschränken indem zum Beispiel die Rücktaste deaktiviert, der Text unlesbar und/oder ein bestimmtes Zeitlimit aktiviert wird.
+Andererseits lassen sich zur Inspiration hübsche Bilder und zufällige Wikipedia-Artikel einblenden. (Diese Funktionen rufen die Daten von externen Servern ab.)
+
+Es funktioniert komplett im Browser. Die geschriebenen Texte werden nicht gespeichert.
+
+Dieses kleine Tool startete als Lernprojekt und wurde in seiner ursprünglichen Form an einem Wochenende zusammengehackt. Ein Freund von mir fand daran Gefallen und hatte noch ein paar gute Ideen, die mich dazu motivierten, noch weiter daran zu arbeiten.
 Bitte entschuldigt den unsauberen Code. Ich lerne und arbeite noch daran. Aber immerhin funktioniert es.
 
 Ich freue mich über jegliches Feedback.
