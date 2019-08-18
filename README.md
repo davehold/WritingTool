@@ -49,10 +49,6 @@ See the LICENSE file for license rights and limitations (MIT).
 
 ## Last Update
 
-# Beta 1.6:
-    Bugs>
-    + Fixed: stuff I didn't keep track of
-
-    Features>
-    + Added: Wikipedia API-connection to get random articles from wikipedia and wiktionary (GER/ENG) for inspiration
+# Beta 1.7:
+    Misc> Removed license
 
