@@ -43,12 +43,10 @@ Ich freue mich über jegliches Feedback.
 # Contact
 E-Mail: post@dhold.net
 
-# License
-See the LICENSE file for license rights and limitations (MIT).
-
-
 ## Last Update
 
 # Beta 1.7:
-    Misc> Removed license
+    Misc> 
+        Removed license
+        Added Link to website
 
