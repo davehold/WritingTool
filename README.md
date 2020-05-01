@@ -1,4 +1,9 @@
 # Writing Tool
+
+![Screenshot-bright](https://user-images.githubusercontent.com/29782835/80816669-33fe8c80-8bd0-11ea-8cb7-f5463aad7d43.png)
+
+![Screenshot-dark](https://user-images.githubusercontent.com/29782835/80816693-42e53f00-8bd0-11ea-8b85-0c8e82401dc5.png)
+
 With Writing Tool authors can build their own environment for creative writing. You can restrict yourself by deactivating the backspace-key, hiding the actual text and/or set a time limit.
 You can also get a nice picture and a random Article from Wikipedia for inspiration, while writing.
 (Those functions get their data from external servers.)
