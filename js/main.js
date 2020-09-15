@@ -17,8 +17,7 @@ var lang = "en";
 var wiki = "wikipedia";
 var wikiAPI = "https://"+lang+"."+wiki+".org/w/api.php?callback=?";
 var owm = false;
-var owm_arr = [];
-
+var owm_arr = []; 
 var $textarea;
 var $options;
 var $header;
@@ -97,11 +96,20 @@ $( document ).ready(function() {
         if(darkmode)
         {
             $("#stylesheet").prop('disabled', true);
-            $("#darkModeButton").text("Dark Mode 👻");
+            if(lang == "de") {
+                $("#darkModeButton").text("Dunkler Modus 👻");
+            } else {
+                $("#darkModeButton").text("Dark Mode 👻");
+            }
+            
             darkmode = false;
         } else {
             $("#stylesheet").prop('disabled', false);
-            $("#darkModeButton").text("Bright Mode 🌞");
+            if(lang == "de") {
+                $("#darkModeButton").text("Heller Modus 🌞");
+            } else {
+                $("#darkModeButton").text("Bright Mode 🌞");
+            }            
             darkmode = true;
         }
     });
