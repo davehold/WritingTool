@@ -9,12 +9,12 @@
     </head>
     <body id="body">
         
-        <div id="textarea" class="" contenteditable spellcheck="false">>>&nbsp;Choose your preferences and click "Start writing".</div>
+        <div id="textarea" class="" contenteditable spellcheck="false">>>&nbsp;W&auml;hle deine Einstellungen und klicke auf "Schreiben Beginnen".</div>
 
         <div id="overlay-wrapper">
             <div id="overlay">
-                <p id="timer-ui">Time left: <span id="timer" class="">00:00</span></p>
-                <p id="wordcount-ui">Wordcount: <span title="This is your wordcount" class="wordcount">0</span><span id="maxwords" title="This is the maximum amount of words you can type" class="">0</span></p>
+                <p id="timer-ui">Zeit &uuml;brig: <span id="timer" class="">00:00</span></p>
+                <p id="wordcount-ui">W&ouml;rter: <span title="This is your wordcount" class="wordcount">0</span><span id="maxwords" title="This is the maximum amount of words you can type" class="">0</span></p>
             </div>
         </div>
 
@@ -23,15 +23,15 @@
         </div>
 
         <div id="quick-settings">
-            <div id="qs-click" class="clickable"><b>Quick Settings</b></div>
+            <div id="qs-click" class="clickable"><b>Schnelleinstellungen</b></div>
             <div id="qs-menu">
-                <p class="clickable" onclick="toggleBlur()">Toggle Blur</p>
-                <p class="results-popup_open clickable" onclick="toggleResults()">Stop writing</p>
-                <p class="clickable" id="toggleOverlay" onclick="toggleOverlay()">Toggle Overlay </p>
-                <p class="wiki_open clickable">Get random article</p>
+                <p class="clickable" onclick="toggleBlur()">Unsch&auml;rfe umschalten</p>
+                <p class="results-popup_open clickable" onclick="toggleResults()">Schreiben beenden</p>
+                <p class="clickable" id="toggleOverlay" onclick="toggleOverlay()">Oberfl&auml;che umschalten </p>
+                <p class="wiki_open clickable">Zuf&auml;lligen Artikel laden</p>
                 <p>
                     <button class="small-button clickable" onclick="increaseFontSize()">++</button>
-                    <span>Size: </span><span id="qscurrentFontSize">0</span>
+                    <span>Gr&ouml;&szlig;e: </span><span id="qscurrentFontSize">0</span>
                     <button class="small-button clickable" onclick="decreaseFontSize()">--</button>
                 </p>
             </div>
@@ -39,33 +39,33 @@
 
         <div id="results-popup" class="popup results">
             <div id="results">
-                <h2>Results are in: </h2>
-                <div>You wrote <span class="wordcount">0</span> words.</div>
-                <div>Here is your text:</div>
+                <h2>Die Resultate: </h2>
+                <div>Du hast <span class="wordcount">0</span> W&ouml;rter geschrieben.</div>
+                <div>Hier ist dein Text:</div>
                 <p><textarea id="typedtext"></textarea></p>
-                <button class="big-button clickable" onclick="location.reload()">Restart</button>
+                <button class="big-button clickable" onclick="location.reload()">Neustart</button>
             </div>
         </div>
 
         <div id="wiki" class="popup" style="max-width: 60vw">
-            <button class="big-button wiki_close clickable positive" style="float: right">Close</button>
+            <button class="big-button wiki_close clickable positive" style="float: right">Schlie&szlig;en</button>
             <div id="wiki-pop-head"></div>
-            <div id="wiki-pop-text">[Fetching article]</div>
+            <div id="wiki-pop-text">[Lade Artikel]</div>
         </div>
 
         <div id="start-popup" class="popup">
             <div id="header">
                 <h1>Writing Tool</h1>
-                <p><a href="https://writing-tool.com">More info</a></p>
+                <p><a href="https://writing-tool.com">Mehr Informationen</a></p>
                 <p>Version: 1.8</p>
-                <p>Made by <a href="https://github.com/davehold" target="_blank">Dave Leibhold</a> with <a href="https://jquery.com/" target="_blank">jquery</a> and <a href="https://prepros.io/" target="_blank">Prepros</a>.</p>
-                <p>Sourcecode: <a href="https://github.com/davehold/WritingTool" target="_blank">Github</a></p>
+                <p>Erstellt von <a href="https://github.com/davehold" target="_blank">Dave Leibhold</a> mit <a href="https://jquery.com/" target="_blank">jquery</a> und <a href="https://prepros.io/" target="_blank">Prepros</a>.</p>
+                <p>Quellcode: <a href="https://github.com/davehold/WritingTool" target="_blank">Github</a></p>
             </div>
 
             <div id="options">
                 <p>
                     <button class="small-button clickable" onclick="increaseFontSize()">++</button>
-                    <span>current font size: </span><span id="currentFontSize">0</span>
+                    <span>Aktuelle Schriftgr&ouml;&szlig;e: </span><span id="currentFontSize">0</span>
                     <button class="small-button clickable" onclick="decreaseFontSize()">--</button>
                 </p>
                 
@@ -74,65 +74,65 @@
                         <input type="checkbox" class="input-inline" id="checkboxTimer" onclick="toggleTimer()">
                         <label for="checkboxTimer"></label>
                     </span> 
-                    I want to write for 
+                    Ich m&ouml;chte f&uuml;r  
                     <span>
                         <input type="tel" id="timerInput" class="input-inline" size="2" value="25">
-                    </span> minutes.
+                    </span> Minuten schreiben.
                 </p>
                 
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxWordLimit">
                         <label for="checkboxWordLimit"></label>
-                    </span> I want to write a maximum of 
+                    </span> Ich m&ouml;chte maximal 
                     <span>
                         <input type="tel" id="maxwordcountInput" class="input-inline" size="4" value="280">
                     </span> 
-                    words.
+                    W&ouml;rter schreiben.
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline regular-checkbox" id="checkboxBackspace">
                         <label for="checkboxBackspace"></label>
-                    </span> Disable Backspace.
+                    </span> Rücktaste deaktivieren.
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxBlind" onclick="toggleBlur()">
                         <label for="checkboxBlind"></label>
-                    </span> Let me write blind.
+                    </span> Blind schreiben.
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxOverlay" onclick="toggleOverlay()">
                         <label for="checkboxOverlay"></label>
-                    </span> Show me the wordcount and timer.
+                    </span> Zeige mir den Wortz&auml;hler und die Zeit.
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxPicture" onclick="togglePicture()">
                         <label for="checkboxPicture"></label>
-                    </span> Show me a nice random picture.<br>(From the external server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)
+                    </span> Zeige mir ein sch&ouml;nes zuf&auml;lliges Bild.<br>(Vom externen Server <a href="https://picsum.photos" target="_blank">picsum.photos</a>.)
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxOWM">
                         <label for="checkboxOWM"></label>
-                    </span> One Word Mode
+                    </span> Ein-Wort-Modus
                 </p>
                 <p>
                     <span class="nicecheck">
                         <input type="checkbox" class="input-inline" id="checkboxRNDArticle">
                         <label for="checkboxRNDArticle"></label>
-                    </span> Show me a random article every <span><input type="tel" id="articleTimerInput" class="input-inline" size="1" value="5"></span> minutes.
+                    </span> Zeige mir alle <span><input type="tel" id="articleTimerInput" class="input-inline" size="1" value="5"></span> Minuten einen zuf&auml;lligen Artikel.
                 </p>
                 <p>
-                    <span>Get the random 
+                    <span>Laden die zuf&auml;lligen 
                         <select onchange="setLanguage(this)">
-                            <option value="en" selected="selected">english</option>
-                            <option value="de">german</option>
+                            <option value="en" selected="selected">englischen</option>
+                            <option value="de">deutschen</option>
                         </select> 
-                        articles from 
+                        Artikel von 
                         <select onchange="setWiki(this)">
                             <option value="wikipedia" selected="selected">Wikipedia.</option>
                             <option value="wiktionary">Wiktionary.</option>
@@ -141,8 +141,8 @@
                 </p>
 
                 <div class="flex-container">
-                    <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Start writing!</button>
-                    <button class="big-button clickable positive" id="darkModeButton" onclick="">Dark Mode 👻</button>
+                    <button class="big-button start-popup_close clickable positive" onclick="starteDieMaschine()">Schreiben beginnen!</button>
+                    <button class="big-button clickable positive" id="darkModeButton" onclick="">Dunkler Modus 👻</button>
                 </div>
             </div>
         </div>
