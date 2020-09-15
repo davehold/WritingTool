@@ -50,8 +50,8 @@ E-Mail: post@dhold.net
 
 ## Last Update
 
-# Beta 1.7:
+# Beta 1.8:
     Misc> 
-        Removed license
-        Added Link to website
+        Added German translation
+        
 
